@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sage.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Sage_Sage_Ws_CAdxWebServiceXmlCCService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.200.11.12:28980/adxwsvc/services/CAdxWebServiceXmlCC</Value>
+    </Setting>
+    <Setting Name="X3_Pool" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PILOTWEBPOOL</Value>
+    </Setting>
+    <Setting Name="X3_User" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Tangerine</Value>
+    </Setting>
+    <Setting Name="X3_Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7oranges</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

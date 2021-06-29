@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sage" GeneratedClassName="Sage">
+  <Profiles />
+  <Settings>
+    <Setting Name="Sage_Url" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://10.200.11.12:28980/adxwsvc/services/CAdxWebServiceXmlCC</Value>
+    </Setting>
+    <Setting Name="Sage_User" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Tangerine</Value>
+    </Setting>
+    <Setting Name="Sage_Pwd" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7oranges</Value>
+    </Setting>
+    <Setting Name="Sage_Pool" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PILOTWEBPOOL</Value>
+    </Setting>
+    <Setting Name="Sage_Language" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ENG</Value>
+    </Setting>
+    <Setting Name="Sage_Request_Config" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">adxwss.trace.on=on&amp;adxwss.trace.size=16384&amp;adonix.trace.on=on&amp;adonix.trace.level=3&amp;adonix.trace.size=8</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Meplato.Store2" GeneratedClassName="Application">
+  <Profiles />
+  <Settings>
+    <Setting Name="Catalog_Pin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">E616164058</Value>
+    </Setting>
+    <Setting Name="Store_User" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d1b1818558c71134</Value>
+    </Setting>
+    <Setting Name="Store_Url" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://store.meplato.com/api/v2</Value>
+    </Setting>
+    <Setting Name="Store_Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
