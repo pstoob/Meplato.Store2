@@ -127,17 +127,17 @@ namespace Meplato.Store2
         {
             const string UserAgent = "meplato-api-csharp-client/2.2.0";
             Application _config = new Application();
-             HttpClient _HttpClient = HttpClientFactory.Create( HttpMessageHandler(MSGHAND));
+             HttpClient _HttpClient = HttpClientFactory.Create( );
 
 
             // Always use application/json
             _HttpClient.DefaultRequestHeaders.Accept.Clear();
-            _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x"));
+            //_HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             string url = "https://store.meplato.com/api/v2/catalogs/" + pin + "/publish ";
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
-            request.Content = new StringContent("", Encoding.UTF8, "application/json");
-            request.Version = new System.Version("1.0");
+            //request.Content = new StringContent("", Encoding.UTF8, "application/json");
+            //request.Version = new System.Version("1.0");
             request.Headers.Add("Authorization", "'Basic ZDFiMTgxODU1OGM3MTEzNDoiIg=='");
             request.Headers.Add("User-Agent", "'meplato-api-csharp-client/2.2.0'");
            
@@ -176,7 +176,7 @@ namespace Meplato.Store2
 
         }
 
-        private static HttpMessageHandler MSGHAND()
+        private static HttpMessageHandler MSGHAND( )
         {
             throw new NotImplementedException();
         }
