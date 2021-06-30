@@ -35,49 +35,50 @@ namespace Main_Controler
                 //Publish();
                 //Task _Cat = Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog();
 
-                _Helper.PutLog(4, "Main_Controler.Do_Work", "Start update of Meplato");
-                _CurProduct = "";
+                //_Helper.PutLog(4, "Main_Controler.Do_Work", "Start update of Meplato");
+                //_CurProduct = "";
 
-                _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
+                //_Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
 
-                if (_Product != null)
-                {
-                    while ( _Product.Products.Rows.Count > 0)
-                    {
-                        foreach (Types.Product.ProductsRow _ProductsRow in _Product.Products.Rows)
-                        {
-                            try
-                            {
-                                _watch.Restart();
-                                Task _Rsp = _Do_Upsert_Product.Do_Upsert(_ProductsRow);
-                                _watch.Stop();
-                                if (_watch.ElapsedMilliseconds < _minTime)
-                                { Thread.Sleep(Convert.ToInt32(_minTime - _watch.ElapsedMilliseconds)); }
-                            }
-                            catch
-                            { }
-                            finally
-                            { _CurProduct = _ProductsRow.Spn; }
-                        }
-    
-                        _Helper.PutLog(4, "Main_Controler.Do_Work", "Get next batch of products: " + _CurProduct);
+                //if (_Product != null)
+                //{
+                //    while ( _Product.Products.Rows.Count > 0)
+                //    {
+                //        foreach (Types.Product.ProductsRow _ProductsRow in _Product.Products.Rows)
+                //        {
+                //            try
+                //            {
+                //                _watch.Restart();
+                //                Task _Rsp = _Do_Upsert_Product.Do_Upsert(_ProductsRow);
+                //                _watch.Stop();
+                //                if (_watch.ElapsedMilliseconds < _minTime)
+                //                { Thread.Sleep(Convert.ToInt32(_minTime - _watch.ElapsedMilliseconds)); }
+                //            }
+                //            catch
+                //            { }
+                //            finally
+                //            { _CurProduct = _ProductsRow.Spn; }
+                //        }
 
-                        _Product = null;
-                        _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
-                        if (_Product == null)
-                        { break; }
-                    }
-                    Thread.Sleep(4000);
-                    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: "+ _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
-                }
-                else
-                {
-                    _Helper.PutLog(1, "Main_Controler.Do_Work", "Product dataset from Sage is null");
-                }
+                //        _Helper.PutLog(4, "Main_Controler.Do_Work", "Get next batch of products: " + _CurProduct);
+
+                //        _Product = null;
+                //        _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
+                //        if (_Product == null)
+                //        { break; }
+                //    }
+                //    Thread.Sleep(4000);
+                //    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: "+ _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
+                //}
+                //else
+                //{
+                //    _Helper.PutLog(1, "Main_Controler.Do_Work", "Product dataset from Sage is null");
+                //}
 
 
-                Task _task = _Catalog_Publish.Do_Publish_Catalog();
+                //Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog();
 
+                Task  _pub = _Catalog_Publish.Do_Publish_Catalog();
 
             }
             catch (Exception _ex)
@@ -90,21 +91,25 @@ namespace Main_Controler
             }
         }
 
-        //void Run_Thread()
+        //void Do_Publish()
         //{
-        //    Thread _Thr = new Thread(Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog);
-        //    _Thr.Name = "Publish";
-        //    _Thr.Priority = ThreadPriority.AboveNormal;
-        //    _Thr.Start();
+
+        //    Thread _thr = new Thread(Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog);
+
+        //    _thr.Start();
+        //    _Helper.PutLog(4, "Main_Controler.Do_Publish", _thr.ThreadState.ToString()); 
 
 
+        //}
+        // async Task <Meplato.Store2.Catalogs.PublishResponse> Do_Publish()
 
-        //    }
+        //{
+        //    Meplato.Store2.Catalog_Publish_MP _Catalog_Publish = new Meplato.Store2.Catalog_Publish_MP();
 
-        async Task Publish()
-        {
-            //Task _Cat = await Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog();
+        //    //Meplato.Store2.Catalogs.PublishResponse _pub = await _Catalog_Publish.Do_Publish_Catalog();
 
-        }
+        //    //return _pub;
+        //}
+
     }
 }

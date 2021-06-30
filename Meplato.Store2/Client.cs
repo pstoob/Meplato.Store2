@@ -86,13 +86,7 @@ namespace Meplato.Store2
                 var content = body is string ? (string)body : JsonConvert.SerializeObject(body);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
             }
-            //else
-            //{
-
-            //    request.Content = new StringContent("", Encoding.UTF8, "application/xml");
-            //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //}
+ 
             // Perform HTTP request and wrap response in IResponse
             try
             {
@@ -104,6 +98,10 @@ namespace Meplato.Store2
 
                 throw ServiceException.FromResponse(response);
             }
+            catch (HttpRequestException _re)
+            {
+                throw _re;
+            }
             catch (ServiceException _se)
             {
                 throw _se;
@@ -112,6 +110,7 @@ namespace Meplato.Store2
             {
                 throw new ServiceException("Request failed", null, e);
             }
+            
         }
     }
 }

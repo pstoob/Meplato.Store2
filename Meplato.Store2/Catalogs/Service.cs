@@ -1057,7 +1057,7 @@ namespace Meplato.Store2.Catalogs
 	{
 		#region PublishService
 
-		private readonly Service _service;
+		private  Service _service;
 		private readonly IDictionary<string, object> _opt = new Dictionary<string, object>();
 		private readonly IDictionary<string, string> _hdr = new Dictionary<string, string>();
 
@@ -1083,7 +1083,7 @@ namespace Meplato.Store2.Catalogs
 		/// <summary>
 		///     Execute the operation.
 		/// </summary>
-		public async Task<PublishResponse> Do()
+		public  async Task<PublishResponse> Do()
 			{
 			// Make a copy of the parameters and add the path parameters to it
 			var parameters = new Dictionary<string, object>();
@@ -1098,7 +1098,7 @@ namespace Meplato.Store2.Catalogs
 				headers["Authorization"] = authorization;
 			}
 
-			var uriTemplate = _service.BaseURL + "/catalogs/{pin}/publish?pretty=1";
+			var uriTemplate = _service.BaseURL + "/catalogs/{pin}/publish";
 			try
 			{
 				var response = await _service.Client.Execute(
