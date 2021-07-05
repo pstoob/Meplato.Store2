@@ -31,55 +31,49 @@ namespace Main_Controler
                 _Do_Upsert_Product.successes = 0;
                 _Do_Upsert_Product.failures = 0;
 
-                ////Run_Thread();
-                //Publish();
-                //Task _Cat = Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog();
+                _Helper.PutLog(4, "Main_Controler.Do_Work", "Start update of Meplato");
+                _CurProduct = "";
 
-                //_Helper.PutLog(4, "Main_Controler.Do_Work", "Start update of Meplato");
-                //_CurProduct = "";
+                _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
 
-                //_Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
+                if (_Product != null)
+                {
+                    while (_Product.Products.Rows.Count > 0)
+                    {
+                        foreach (Types.Product.ProductsRow _ProductsRow in _Product.Products.Rows)
+                        {
+                            try
+                            {
+                                _watch.Restart();
+                                Task _Rsp = _Do_Upsert_Product.Do_Upsert(_ProductsRow);
+                                _watch.Stop();
+                                if (_watch.ElapsedMilliseconds < _minTime)
+                                { Thread.Sleep(Convert.ToInt32(_minTime - _watch.ElapsedMilliseconds)); }
+                            }
+                            catch
+                            { }
+                            finally
+                            { _CurProduct = _ProductsRow.Spn; }
+                        }
 
-                //if (_Product != null)
-                //{
-                //    while (_Product.Products.Rows.Count > 0)
-                //    {
-                //        foreach (Types.Product.ProductsRow _ProductsRow in _Product.Products.Rows)
-                //        {
-                //            try
-                //            {
-                //                _watch.Restart();
-                //                Task _Rsp = _Do_Upsert_Product.Do_Upsert(_ProductsRow);
-                //                _watch.Stop();
-                //                if (_watch.ElapsedMilliseconds < _minTime)
-                //                { Thread.Sleep(Convert.ToInt32(_minTime - _watch.ElapsedMilliseconds)); }
-                //            }
-                //            catch
-                //            { }
-                //            finally
-                //            { _CurProduct = _ProductsRow.Spn; }
-                //        }
+                        _Helper.PutLog(4, "Main_Controler.Do_Work", "Get next batch of products: " + _CurProduct);
 
-                //        _Helper.PutLog(4, "Main_Controler.Do_Work", "Get next batch of products: " + _CurProduct);
+                        _Product = null;
+                        _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
+                        if (_Product == null)
+                        { break; }
+                    }
+ 
+                    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: " + _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
+                }
+                else
+                {
+                    _Helper.PutLog(1, "Main_Controler.Do_Work", "Product dataset from Sage is null");
+                }
 
-                //        _Product = null;
-                //        _Product = _Sage_Data.Get_Siemens_Product(_CurProduct);
-                //        if (_Product == null)
-                //        { break; }
-                //    }
-                //    Thread.Sleep(4000);
-                //    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: " + _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
-                //}
-                //else
-                //{
-                //    _Helper.PutLog(1, "Main_Controler.Do_Work", "Product dataset from Sage is null");
-                //}
-
-
-                //Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog();
-
+                Thread.Sleep(5000);
                 Task  _pub = _Catalog_Publish.Do_Publish_Catalog();
-
+                Thread.Sleep(2000);
             }
             catch (Exception _ex)
                 {

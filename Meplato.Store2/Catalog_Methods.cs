@@ -10,12 +10,14 @@ using Types;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Web;
+
 
 namespace Meplato.Store2
 {
     public class Catalog_Publish_MP
     {
-        //private static readonly System.Net.Http.HttpClient _HttpClient = new HttpClient();
+        private static readonly System.Net.Http.HttpClient _HttpClient = HttpClientFactory.Create();
 
         public void Do_Publish()
         {
@@ -50,18 +52,15 @@ namespace Meplato.Store2
             //  Publish Meplato Catalog
             try
             {
-                await policy.ExecuteAsync(async () =>
+                 await policy.ExecuteAsync(async () =>
                 {
                     try
                     {
                         _Helper.PutLog(4, "Catalog_Publish_MP.PublishCatalog", "before Publish");
-                        //var service = GetCatalogsService(client);
-                        //var response = await service.Publish().Pin(pin).Do();
-                        //var response = await GetCatalogsService(client).Publish().Pin(pin).Do();
-                        var response = await PublishCatalog(client, pin);
-                        //var response = await SendRequest(pin);
+                        var service = GetCatalogsService(client);
+                        var response = await service.Publish().Pin(pin).Do();
                         _Helper.PutLog(4, "Catalog_Publish_MP.PublishCatalog", "After publish");
-                        //return response;
+                        return response;
                     }
                     catch (Meplato.Store2.ServiceException _ex)
                     {
@@ -80,24 +79,24 @@ namespace Meplato.Store2
             return null;
         }
 
-        private static async Task<PublishResponse> PublishCatalog(Client client, string pin)
-        {
-            Helper_Function _Helper = new Helper_Function();
-            try
-            {
-                //return await GetCatalogsService(client).Publish().Pin(pin).Do();
-                await SendRequest(pin);
-                //return response.GetBodyJSON<PublishResponse>();
-                return null;
-            }
-            catch (ServiceException _ex)
-            {
-                _Helper.PutLog(1, "Catalog_Publish_MP.PublishCatalog", _ex.Message);
-                throw _ex;
-            }
-            finally
-            { _Helper = null; }
-        }
+        //private  async Task<PublishResponse> PublishCatalog(Client client, string pin)
+        //{
+        //    Helper_Function _Helper = new Helper_Function();
+        //    try
+        //    {
+        //        //return await GetCatalogsService(client).Publish().Pin(pin).Do();
+        //        var response = await SendRequest(pin);
+        //        return response.GetBodyJSON<PublishResponse>();
+        //        //return response;
+        //    }
+        //    catch (ServiceException _ex)
+        //    {
+        //        _Helper.PutLog(1, "Catalog_Publish_MP.PublishCatalog", _ex.Message);
+        //        throw _ex;
+        //    }
+        //    finally
+        //    { _Helper = null; }
+        //}
 
         private static Meplato.Store2.Catalogs.Service GetCatalogsService(Client client)
         {
@@ -123,64 +122,75 @@ namespace Meplato.Store2
         }
 
         //private static async  Task<IResponse>  SendRequest(string pin)
-        private static  async Task SendRequest(string pin)
+        //private   async Task<IResponse> SendRequest(string pin)
 
-        {
-            const string UserAgent = "meplato-api-csharp-client/2.2.0";
-            Application _config = new Application();
-            HttpClient _HttpClient = HttpClientFactory.Create();
-            //HttpClient _HttpClient = new HttpClient();
+        //{
+        //    const string UserAgent = "meplato-api-csharp-client/2.2.0";
+        //    Application _config = new Application();
+        //    //HttpClient _HttpClient = HttpClientFactory.Create();
+        //    //HttpClient _HttpClient = new HttpClient();
 
-            // Always use application/json
-            //_HttpClient.DefaultRequestHeaders.Clear();
-            //_HttpClient.DefaultRequestHeaders.Accept.Clear();
-            _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _HttpClient.DefaultRequestHeaders.Host = "store.meplato.com";
-            _HttpClient.DefaultRequestHeaders.Connection.Add("Keep-Alive");
-            _HttpClient.BaseAddress = new Uri("https://store.meplato.com");
-            
-            string url = "https://store.meplato.com/api/v2/catalogs/" + pin + "/publish ";
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
-            //request.Content = new StringContent("", Encoding.UTF8, "application/json");
-            request.Version = new System.Version("1.0");
-            request.Headers.Add("Authorization", "'Basic ZDFiMTgxODU1OGM3MTEzNDoiIg=='");
-            request.Headers.Add("User-Agent", UserAgent);
+        //    // Always use application/json
+        //    //_HttpClient.DefaultRequestHeaders.Clear();
+        //    _HttpClient.DefaultRequestHeaders.Accept.Clear();
+        //    _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+        //    //_HttpClient.DefaultRequestHeaders.Host = "store.meplato.com";
+        //    //_HttpClient.DefaultRequestHeaders.Connection.Add("Keep-Alive");
+        //    //_HttpClient.BaseAddress = new Uri("https://store.meplato.com");
 
-            //request.Headers.Add("Content-Type", "application/json");
-            //request.Headers.Add("Content-Length", "0");
-            //request.Headers.Add("Host", "store.meplato.com");
-            //request.Headers.Add("Connection", "Keep-Alive");
-            //request.RequestUri = new Uri(url);
+        //    string url = "https://store.meplato.com/api/v2/catalogs/" + pin + "/publish?pretty=1 HTTP/1.1";
+        //    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(url));
 
-            try
-            {
-                //_httpClient.BaseAddress = new Uri( "store.meplato.com");
-                
-                var httpResponse = await _HttpClient.SendAsync(request);
+        //    request.Content = new StringContent("Hello", Encoding.UTF8, "application/json");
+        //    //request.Version = new System.Version("1.0");
+        //    request.Headers.Add("Authorization", "Basic ZDFiMTgxODU1OGM3MTEzNDo=");
+        //    request.Headers.Add("User-Agent", UserAgent);
 
-                //var response = await httpResponse.Content.ReadAsStringAsync();
+        //    //request.Headers.Add("Content-Type", "application/json");
+        //    request.Headers.Add("Host", "store.meplato.com");
+        //    request.Headers.Add("Connection", "keep-alive");
+        //    request.Headers.Add("Cache-Control", "no-cache");
+        //    request.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+        //    request.RequestUri = new Uri(url);
 
-                var _response = new Response(httpResponse);
+        //    try
+        //    {
 
-                //if (httpResponse.IsSuccessStatusCode)
-                //    return _response;
 
-                throw new Exception("not successful");
-            }
-            catch (HttpRequestException _re)
-            {
-                throw _re;
-            }
-            catch (ServiceException _se)
-            {
-                throw _se;
-            }
-            catch (Exception e)
-            {
-                throw new ServiceException("Request failed", null, e);
-            }
 
-        }
+
+        //        //var response = await  _HttpClient.PostAsync(url, content);
+
+        //        //var responseString = await response.Content.ReadAsStringAsync();
+
+
+        //        //_httpClient.BaseAddress = new Uri( "store.meplato.com");
+        //        //PublishResponse _response;
+        //        var httpResponse = await _HttpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead);
+
+        //        ////var response = await httpResponse.Content.ReadAsStringAsync();
+
+        //        var _response = new Response(httpResponse);
+
+        //        if (httpResponse.IsSuccessStatusCode)
+        //            return _response;
+
+        //        throw new Exception("not successful");
+        //    }
+        //    catch (HttpRequestException _re)
+        //    {
+        //        throw _re;
+        //    }
+        //    catch (ServiceException _se)
+        //    {
+        //        throw _se;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new ServiceException("Request failed", null, e);
+        //    }
+
+        //}
 
         private static HttpMessageHandler MSGHAND( )
         {
