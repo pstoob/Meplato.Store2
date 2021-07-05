@@ -59,7 +59,7 @@ namespace Meplato.Store2
                         //var response = await service.Publish().Pin(pin).Do();
                         //var response = await GetCatalogsService(client).Publish().Pin(pin).Do();
                         var response = await PublishCatalog(client, pin);
-                        //var response = await SendRequest();
+                        //var response = await SendRequest(pin);
                         _Helper.PutLog(4, "Catalog_Publish_MP.PublishCatalog", "After publish");
                         //return response;
                     }
@@ -86,8 +86,9 @@ namespace Meplato.Store2
             try
             {
                 //return await GetCatalogsService(client).Publish().Pin(pin).Do();
-                var response = await SendRequest(pin);
-                return response.GetBodyJSON<PublishResponse>();
+                await SendRequest(pin);
+                //return response.GetBodyJSON<PublishResponse>();
+                return null;
             }
             catch (ServiceException _ex)
             {
@@ -121,30 +122,35 @@ namespace Meplato.Store2
             { _Helper = null; }
         }
 
-        private static async  Task<IResponse>  SendRequest(string pin)
-
+        //private static async  Task<IResponse>  SendRequest(string pin)
+        private static  async Task SendRequest(string pin)
 
         {
             const string UserAgent = "meplato-api-csharp-client/2.2.0";
             Application _config = new Application();
-             HttpClient _HttpClient = HttpClientFactory.Create( );
-
+            HttpClient _HttpClient = HttpClientFactory.Create();
+            //HttpClient _HttpClient = new HttpClient();
 
             // Always use application/json
-            _HttpClient.DefaultRequestHeaders.Accept.Clear();
-            //_HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+            //_HttpClient.DefaultRequestHeaders.Clear();
+            //_HttpClient.DefaultRequestHeaders.Accept.Clear();
+            _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _HttpClient.DefaultRequestHeaders.Host = "store.meplato.com";
+            _HttpClient.DefaultRequestHeaders.Connection.Add("Keep-Alive");
+            _HttpClient.BaseAddress = new Uri("https://store.meplato.com");
+            
             string url = "https://store.meplato.com/api/v2/catalogs/" + pin + "/publish ";
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
             //request.Content = new StringContent("", Encoding.UTF8, "application/json");
-            //request.Version = new System.Version("1.0");
+            request.Version = new System.Version("1.0");
             request.Headers.Add("Authorization", "'Basic ZDFiMTgxODU1OGM3MTEzNDoiIg=='");
-            request.Headers.Add("User-Agent", "'meplato-api-csharp-client/2.2.0'");
-           
+            request.Headers.Add("User-Agent", UserAgent);
+
             //request.Headers.Add("Content-Type", "application/json");
             //request.Headers.Add("Content-Length", "0");
             //request.Headers.Add("Host", "store.meplato.com");
             //request.Headers.Add("Connection", "Keep-Alive");
+            //request.RequestUri = new Uri(url);
 
             try
             {
@@ -156,8 +162,8 @@ namespace Meplato.Store2
 
                 var _response = new Response(httpResponse);
 
-                if (httpResponse.IsSuccessStatusCode)
-                    return _response;
+                //if (httpResponse.IsSuccessStatusCode)
+                //    return _response;
 
                 throw new Exception("not successful");
             }

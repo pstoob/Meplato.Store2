@@ -42,7 +42,7 @@ namespace Main_Controler
 
                 //if (_Product != null)
                 //{
-                //    while ( _Product.Products.Rows.Count > 0)
+                //    while (_Product.Products.Rows.Count > 0)
                 //    {
                 //        foreach (Types.Product.ProductsRow _ProductsRow in _Product.Products.Rows)
                 //        {
@@ -68,7 +68,7 @@ namespace Main_Controler
                 //        { break; }
                 //    }
                 //    Thread.Sleep(4000);
-                //    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: "+ _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
+                //    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: " + _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
                 //}
                 //else
                 //{
