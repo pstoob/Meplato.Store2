@@ -8,8 +8,15 @@ using Types;
 namespace Main_Controler
 
 {
+    //-------------------------------
+    //
+    //-------------------------------
     class Program
     {
+
+        //-------------------------------
+        // call the main controller
+        //-------------------------------
         static void Main(string[] args)
         {
             try
@@ -19,7 +26,7 @@ namespace Main_Controler
             }
             catch
             {
-
+                // do nothing
             }
         }
     }

@@ -9,12 +9,23 @@ using System.Configuration;
 
 namespace Types
 {
+
+    //-------------------------------
+    //
+    //-------------------------------
     public class Types
     {
     }
 
+    //-------------------------------
+    //
+    //-------------------------------
     public class Helper_Function
     {
+
+        //-------------------------------
+        //
+        //-------------------------------
         public void PutLog(
         int _Error
         , string _Location

@@ -77,5 +77,60 @@ namespace Sage {
                 return ((string)(this["Sage_Request_Config"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V12")]
+        public string X3_Version {
+            get {
+                return ((string)(this["X3_Version"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        public string V12_User {
+            get {
+                return ((string)(this["V12_User"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("binga!@#")]
+        public string V12_Password {
+            get {
+                return ((string)(this["V12_Password"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BGRMIG")]
+        public string V12_Pool {
+            get {
+                return ((string)(this["V12_Pool"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
+        public int Sage_TimeOut {
+            get {
+                return ((int)(this["Sage_TimeOut"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://10.200.11.41:8124/soap-generic/syracuse/collaboration/syracuse/CAdxWebServ" +
+            "iceXmlCC")]
+        public string V12_Url {
+            get {
+                return ((string)(this["V12_Url"]));
+            }
+        }
     }
 }

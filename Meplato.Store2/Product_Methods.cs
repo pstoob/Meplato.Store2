@@ -12,6 +12,9 @@ using Types;
 
 namespace Meplato.Store2
 {
+    //-------------------------------
+    // Not used
+    //-------------------------------
     public class Product_Base_Methods
 
     {
@@ -36,7 +39,9 @@ namespace Meplato.Store2
 
         }
 
-
+        //-------------------------------
+        //
+        //-------------------------------
         public static Meplato.Store2.Products.Service GetProductsService(Client client)
         {
             Helper_Function _Helper = new Helper_Function();
@@ -60,15 +65,20 @@ namespace Meplato.Store2
         }
     }
 
+    //-------------------------------
+    //Not used
+    //-------------------------------
     public class Delete_Product_MP
     {
         Helper_Function _Helper { get; set; }
 
+        //-------------------------------
+        //
+        //-------------------------------
         public async Task Do_Delete(string _Product)
         {
             {
-                // Siemens pricing use PLICRD_0 = '15346'
-
+  
                 #region Instantiate Environment and API Policy
                 Application _config = new Application();
                 string pin = _config.Catalog_Pin;  //   "87E3AE036B"; //> Test Catalog Pin //"39EA1EA9C0"; > Main Catalog Pin
@@ -122,11 +132,15 @@ namespace Meplato.Store2
         }
     }
 
+    //-------------------------------
+    // insert or update
+    //-------------------------------
     public class Upsert_Product_MP
     {
 
         public int successes { get; set; }
         public int failures { get; set; }
+
         //------------------------------------
         //
         //------------------------------------
@@ -151,17 +165,14 @@ namespace Meplato.Store2
                     attempt => TimeSpan.FromSeconds(0.1 * Math.Pow(2, attempt)),
                     (exception, waitTime) =>
                     {
-
                         retries++;
                         _Helper.PutLog(1, "Do_Upsert.Polly.Retry.AsyncRetryPolicy", $"Exception: {exception.Message}... retry #{retries} with a wait time of {waitTime}");
-                        //Console.WriteLine($"Exception");
                     }
                 );
             #endregion
 
             #region Core functions
-            //_Helper.PutLog(4, "Product_Methods.process product", _ProductRow.Spn);
-
+  
             try
             {
                 await _Policy.ExecuteAsync(async () =>
@@ -233,7 +244,7 @@ namespace Meplato.Store2
               
                     upsert.Image =  _ProductRow.MimeInfo;
 
-                    if (_ProductRow.CuPerOu > 0)
+                    if (_ProductRow.CuPerOu > 0)  // stock unit not used
                     {
                         //upsert.ContentUnit = _ProductRow.ContentUnit;
                         //upsert.CuPerOu = _ProductRow.CuPerOu;
@@ -246,9 +257,7 @@ namespace Meplato.Store2
 
                     try
                     {
- 
                         UpsertProductResponse response = await UpsertProduct(client, pin, upsert.Spn, upsert);
-                        //_Helper.PutLog(4, "Product_Methods.Do_Upsert " + _ProductRow.Spn, response.Link);
                         successes++;
                         return response;
                     }
@@ -279,6 +288,9 @@ namespace Meplato.Store2
             return null;
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         private static async Task<UpsertProductResponse> UpsertProduct(Client client, string pin, string spn, UpsertProduct upsert)
         {
             try
@@ -291,6 +303,10 @@ namespace Meplato.Store2
                 throw;
             }
         }
+
+        //-------------------------------
+        //
+        //-------------------------------
         public static Meplato.Store2.Products.Service GetProductsService(Client client)
         {
             Helper_Function _Helper = new Helper_Function();
@@ -315,8 +331,15 @@ namespace Meplato.Store2
 
     }
 
+    //-------------------------------
+    // Not used yet
+    //-------------------------------
     public class Get_Product_MP
-    { 
+    {
+
+        //-------------------------------
+        //
+        //-------------------------------
         public async static Task Do_Get_Product(string _Product)
         {
             {
@@ -373,6 +396,9 @@ namespace Meplato.Store2
             }
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         public static Meplato.Store2.Products.Service GetProductsService(Client client)
         {
             Helper_Function _Helper = new Helper_Function();
@@ -396,9 +422,15 @@ namespace Meplato.Store2
         }
     }
 
-
+    //-------------------------------
+    // Not used
+    //-------------------------------
     public class Update_Product_MP
     {
+
+        //-------------------------------
+        //
+        //-------------------------------
         public static async  Task Do_Update_Product(Types.Product.ProductsRow _ProductRow)
         {
             {
@@ -475,7 +507,9 @@ namespace Meplato.Store2
             }
         }
 
-
+        //-------------------------------
+        //
+        //-------------------------------
         private static async Task<UpdateProductResponse> UpdateProduct(Client client, string pin, string spn, UpdateProduct update)
         {
             try
@@ -489,6 +523,9 @@ namespace Meplato.Store2
             }
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         public static Meplato.Store2.Products.Service GetProductsService(Client client)
         {
             Helper_Function _Helper = new Helper_Function();

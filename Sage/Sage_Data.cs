@@ -11,10 +11,16 @@ using System.Globalization;
 
 namespace Sage
 {
+    //-------------------------------
+    //
+    //-------------------------------
     public class Sage_Data
     {
         Helper_Function _Helper { get; set; }
 
+        //-------------------------------
+        //
+        //-------------------------------
         public Types.Product Get_Siemens_Product(string _Start_Product)
         {
             try
@@ -23,6 +29,8 @@ namespace Sage
                 Sage_Access_Methods _Sage_Method = new Sage_Access_Methods();
                 Types.Product _Product = new Types.Product();
                 _Helper = new Helper_Function();
+
+                _Sage_Method.Init();
 
                 string _InputXml = "<PARAM>" +
                     "<GRP ID= \"GRP1\">" +
@@ -43,6 +51,9 @@ namespace Sage
             }
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         Types.Product Convert_Product_Xml(XmlDocument _XmlDoc)
         {
 
@@ -126,6 +137,9 @@ namespace Sage
             }
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         string GetFieldVal(
           XmlNode _ParentNode 
           , String _FieldName 
@@ -171,6 +185,9 @@ namespace Sage
 
         }
 
+        //-------------------------------
+        //
+        //-------------------------------
         string Remove_Quotes(string Input)
         {
             try

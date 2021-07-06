@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Main_Controler" GeneratedClassName="Main">
+  <Profiles />
+  <Settings>
+    <Setting Name="MinTime" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="WaitForEnd" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4000</Value>
+    </Setting>
+    <Setting Name="WaitAfterPublish" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

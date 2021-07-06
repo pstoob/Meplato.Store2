@@ -20,5 +20,23 @@
     <Setting Name="Sage_Request_Config" Type="System.String" Scope="Application">
       <Value Profile="(Default)">adxwss.trace.on=on&amp;adxwss.trace.size=16384&amp;adonix.trace.on=on&amp;adonix.trace.level=3&amp;adonix.trace.size=8</Value>
     </Setting>
+    <Setting Name="X3_Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">V12</Value>
+    </Setting>
+    <Setting Name="V12_User" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">admin</Value>
+    </Setting>
+    <Setting Name="V12_Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">binga!@#</Value>
+    </Setting>
+    <Setting Name="V12_Pool" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BGRMIG</Value>
+    </Setting>
+    <Setting Name="Sage_TimeOut" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
+    <Setting Name="V12_Url" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://10.200.11.41:8124/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

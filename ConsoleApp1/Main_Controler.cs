@@ -14,6 +14,11 @@ namespace Main_Controler
     {
         Helper_Function _Helper { get; set; }
 
+
+        //---------------------------------
+        // Fetch the products from Sage and use upsert for maplato
+        // at the end publish the catalog
+        //---------------------------------
         public void Do_Work ()
         
         {
@@ -21,16 +26,19 @@ namespace Main_Controler
             try
             {
                 _Helper = new Helper_Function();
+                Main _Config = new Main();
                 Sage_Data _Sage_Data = new Sage_Data();
                 Types.Product _Product;
                 var _watch = new System.Diagnostics.Stopwatch();
-                long _minTime = 6;
+                long _minTime = _Config.MinTime;
+                int _Records = 0;
                 Meplato.Store2.Upsert_Product_MP _Do_Upsert_Product = new Meplato.Store2.Upsert_Product_MP();
                 Meplato.Store2.Catalog_Publish_MP _Catalog_Publish = new Meplato.Store2.Catalog_Publish_MP();
 
                 _Do_Upsert_Product.successes = 0;
                 _Do_Upsert_Product.failures = 0;
 
+                Console.WriteLine("Start update of Meplato");
                 _Helper.PutLog(4, "Main_Controler.Do_Work", "Start update of Meplato");
                 _CurProduct = "";
 
@@ -49,6 +57,7 @@ namespace Main_Controler
                                 _watch.Stop();
                                 if (_watch.ElapsedMilliseconds < _minTime)
                                 { Thread.Sleep(Convert.ToInt32(_minTime - _watch.ElapsedMilliseconds)); }
+                                _Records ++;
                             }
                             catch
                             { }
@@ -56,6 +65,7 @@ namespace Main_Controler
                             { _CurProduct = _ProductsRow.Spn; }
                         }
 
+                        Console.WriteLine("Get next batch of products: " + _CurProduct);
                         _Helper.PutLog(4, "Main_Controler.Do_Work", "Get next batch of products: " + _CurProduct);
 
                         _Product = null;
@@ -63,17 +73,16 @@ namespace Main_Controler
                         if (_Product == null)
                         { break; }
                     }
- 
-                    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: " + _Do_Upsert_Product.successes.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
+                    Thread.Sleep(_Config.WaitForEnd); // wait that all threads are finished
+                    _Helper.PutLog(4, "Main_Controler.Do_Work", "Products processed success: " + _Records.ToString() + " failures: " + _Do_Upsert_Product.failures.ToString());
                 }
                 else
                 {
                     _Helper.PutLog(1, "Main_Controler.Do_Work", "Product dataset from Sage is null");
                 }
 
-                Thread.Sleep(5000);
                 Task  _pub = _Catalog_Publish.Do_Publish_Catalog();
-                Thread.Sleep(2000);
+                Thread.Sleep(_Config.WaitAfterPublish);  // wait for the end before killing the object 
             }
             catch (Exception _ex)
                 {
@@ -81,29 +90,10 @@ namespace Main_Controler
                 }
             finally 
             {
+                Console.WriteLine("End update of Meplato");
                 _Helper.PutLog(4, "Main_Controler.Do_Work", "End update of Meplato");
             }
         }
-
-        //void Do_Publish()
-        //{
-
-        //    Thread _thr = new Thread(Meplato.Store2.Catalog_Publish_MP.Do_Publish_Catalog);
-
-        //    _thr.Start();
-        //    _Helper.PutLog(4, "Main_Controler.Do_Publish", _thr.ThreadState.ToString()); 
-
-
-        //}
-        // async Task <Meplato.Store2.Catalogs.PublishResponse> Do_Publish()
-
-        //{
-        //    Meplato.Store2.Catalog_Publish_MP _Catalog_Publish = new Meplato.Store2.Catalog_Publish_MP();
-
-        //    //Meplato.Store2.Catalogs.PublishResponse _pub = await _Catalog_Publish.Do_Publish_Catalog();
-
-        //    //return _pub;
-        //}
 
     }
 }
