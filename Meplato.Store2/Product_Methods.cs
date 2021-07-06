@@ -226,18 +226,18 @@ namespace Meplato.Store2
                     upsert.Bpn = _ProductRow.Mpn;
                     upsert.Manufacturer = _ProductRow.Manufacturer;
                     upsert.Leadtime = _ProductRow.LeadTime;
-                    upsert.ErpGroupSupplier = "EAB";
+                    upsert.ErpGroupSupplier = _config.ErpGroupSupplier;
 
                     upsert.Eclasses = new Eclass[1];
                     upsert.Eclasses[0] = new Eclass();
-                    upsert.Eclasses[0].Version = "10.1";
-                    upsert.Eclasses[0].Code = "20000000";
+                    upsert.Eclasses[0].Version = _config.Eclasses_Version;
+                    upsert.Eclasses[0].Code = _config.Eclasses_Code;
 
                     if (_ProductRow._Unspscs_Code != "")
                     {
                         upsert.Unspscs = new Unspsc[1];
                         upsert.Unspscs[0] = new Unspsc();
-                        upsert.Unspscs[0].Version = "20.0601";
+                        upsert.Unspscs[0].Version = _config.Unspscs_Version;
                         upsert.Unspscs[0].Code = _ProductRow._Unspscs_Code;
                     }
                     upsert.Visible = true;

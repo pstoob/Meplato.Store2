@@ -186,7 +186,7 @@ namespace Sage
         }
 
         //-------------------------------
-        //
+        // not used
         //-------------------------------
         string Remove_Quotes(string Input)
         {

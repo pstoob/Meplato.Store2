@@ -58,5 +58,41 @@ namespace Meplato.Store2 {
                 return ((string)(this["Store_Password"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20.0601")]
+        public string Unspscs_Version {
+            get {
+                return ((string)(this["Unspscs_Version"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.1")]
+        public string Eclasses_Version {
+            get {
+                return ((string)(this["Eclasses_Version"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20000000")]
+        public string Eclasses_Code {
+            get {
+                return ((string)(this["Eclasses_Code"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EAB")]
+        public string ErpGroupSupplier {
+            get {
+                return ((string)(this["ErpGroupSupplier"]));
+            }
+        }
     }
 }

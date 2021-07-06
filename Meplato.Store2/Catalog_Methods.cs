@@ -17,7 +17,7 @@ namespace Meplato.Store2
 {
 
     //-------------------------------
-    //
+    // Publishing the catalog
     //-------------------------------
     public class Catalog_Publish_MP
     {

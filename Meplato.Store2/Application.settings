@@ -14,5 +14,17 @@
     <Setting Name="Store_Password" Type="System.String" Scope="Application">
       <Value Profile="(Default)">""</Value>
     </Setting>
+    <Setting Name="Unspscs_Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">20.0601</Value>
+    </Setting>
+    <Setting Name="Eclasses_Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10.1</Value>
+    </Setting>
+    <Setting Name="Eclasses_Code" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">20000000</Value>
+    </Setting>
+    <Setting Name="ErpGroupSupplier" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">EAB</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

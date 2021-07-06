@@ -125,7 +125,15 @@ namespace Sage
                     return _XmlDoc;
                 }
                 else
-                { return null; }
+                { 
+                    foreach (CAdxMessage _Message in _Result.messages)
+                    {
+                        _Helper.PutLog(2, " Sage_Access_Methods.Run", _Message.message);
+
+                    }
+                    
+                    return null; 
+                }
 
             }
             catch ( System.Net.Sockets.SocketException _soex)
